@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEstateAI Pro - Agent Dashboard</title>
+ <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+ text-align: center;
+  line-height: 1.6;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  width: 22%;
+}
+
+button {
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #666;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+table thead th {
+  background: #333;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f4f4f4;
+}
+
+table tbody tr td {
+  padding: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+ .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+/* modal content is inside the temporary window
+
+      .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fefefe;
+        padding: 30px;
+        border: 1px solid #888;
+        border-radius: 10px;
+        width: 40%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+/* modal text is the text inside the temporary window
+      .modal-text {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .spinner {
+        border: 5px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #4CAF50;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spinner 1s linear infinite;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .opacity {
+        opacity: 0;
+      }
+</style>
+</head>
+<body>
+    <header>
+        <h1>RealEstateAI Pro - Generate Document</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+  <input name="task" type="text" required class="form-row" id="task" placeholder="Enter doc, client and details">
+
+    <input type="button" value="Submit" id="submit">
+</div>
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <p class="modal-text">I am putting cheese on my crackers cause it is peanut butter jelly time</p>
+      <div class="spinner"></div>
+    </div>
+  </div>
+  <div id="responseModal" class="modal">
+    <div class="modal-content">
+      <p class="modal-text" id="responseText" oncontextmenu="return false;">Chatbot response: ...</p>
+      <button id="closeResponseBtn">Close</button>
+    </div>
+  </div>
+ <script>
+    const submitButton = document.getElementById('submit');
+    const myModal = document.getElementById('myModal');
+    const responseModal = document.getElementById('responseModal');
+    const closeResponseBtn = document.getElementById('closeResponseBtn');
+
+    submitButton.addEventListener('click', async () => {
+      console.log('Submit button clicked');
+  const task = document.getElementById('task').value;  const messages = [
+        { role: 'system', content: `You are a real estate transaction coordinator, you are to generate documents relating to a specific transaction. you will get three values passed as user input, the document needed, the clients name, and details. if details is left blank then the default will be to insert the clients name into the appropriate fields` },
+        { role: 'user', content: doc },}` },
+        { role: 'user', content: task },
+      ];
+
+      // Clear input fields and display the modal window
+      document.getElementById('task').value = '';
+      myModal.style.display = 'block';
+
+      console.log('Sending POST request to /api/chat');
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ messages })
+      });
+
+      const jsonResponse = await response.json();
+      const chatbotResponse = jsonResponse;
+
+      // Close the loading modal and display the response in the response popup container
+      myModal.style.display = 'none';
+      document.getElementById('responseText').innerText = `Chatbot response: ${chatbotResponse}`;
+      responseModal.style.display = 'block';
+    });
+
+    // Prevent copy (Ctrl+C) on the responseText element
+    document.getElementById('responseText').addEventListener('copy', (e) => {
+      e.preventDefault();
+    });
+
+    // Add a click event listener to the close button in the response popup container to close it
+    closeResponseBtn.addEventListener('click', () => {
+      responseModal.style.display = 'none';
+    });
+
+  </script>
+</body>
+</html>
+
+
+</section>
+
+</body>
+</html>

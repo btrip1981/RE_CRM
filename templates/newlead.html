@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEstateAI Pro Create Lead</title>
+ <style>
+     * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+ text-align: center;
+  line-height: 1.6;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  width: 22%;
+}
+
+button {
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #666;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+</style>
+</head>
+<body>
+<header>
+        <nav>
+            <ul>
+               <li><a href="/">Home</a>
+
+                <li><a href="user_profile.html">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+<section>
+ <div id="main-section">
+
+    </div>
+
+
+
+
+
+</section>
+<h2>Create New Lead</h2>
+
+<form action="/newlead" method="post">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname"><br>
+  <label for="email">Email:</label><br>
+  <input type="text" id="email" name="email"><br>
+  <label for="phone">Phone:</label><br>
+  <input type="text" id="phone" name="phone"><br>
+    <p>Buyer or Seller</p>
+ <input type="radio" id="buyer" name="buy_sell" value="buyer">
+ <label for="buyer">Buyer</label><br>
+ <input type="radio" id="seller" name="buy_sell" value="seller">
+ <label for="seller">Seller</label><br>
+ <input type="radio" id="both" name="buy_sell" value="both">
+ <label for="both">Both</label><br>
+
+      <div id="addressSection" style="display: none;">
+    <label for="addressSection">Property</label><br>
+          <input type="text" id="address_line1" name="property" placeholder="Line 1"><br>
+          <input type="text" id="address_line2" name="property" placeholder="Line 2"><br>
+          <input type="text" id="address_city" name="property" placeholder="City"><br>
+          <input type="text" id="address_state" name="property" placeholder="State"><br>
+          <input type="text" id="address_zip" name="property" placeholder="Zip"><br>
+          <input type="text" id="est_value" name="property" placeholder="Estimated Value"><br>
+          <input type="text" id="list_price" name="property" placeholder="List Price"><br>
+  </div>
+  <button type="button" id="propertyButton">Show Property Fields</button><br>
+  <input type="submit" value="Submit">
+</form>
+ <footer>
+        <p>&copy; 2023 RealEstateAI Pro. All rights reserved.</p>
+    </footer>
+
+<script>
+document.getElementById('propertyButton').addEventListener('click', function() {
+  var addressSection = document.getElementById('addressSection');
+  if (addressSection.style.display === "none") {
+    addressSection.style.display = "block";
+  } else {
+    addressSection.style.display = "none";
+  }
+});
+</script>
+
+
+
+
+
+</body>
+</html>

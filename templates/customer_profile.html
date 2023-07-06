@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Profile - {{ customer.customer_name }}</title>
+  <style>
+     * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+ text-align: center;
+  line-height: 1.6;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+  </style>
+</head>
+<body>
+    <header>
+        <h1>RealEstateAI Pro - Customer Profile</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>{{ customer.customer_name }}</h1>
+    <h2>Customer Details:</h2>
+    <p>Email: {{ customer.email }}</p>
+    <p>Phone: {{ customer.phone }}</p>
+
+    <h2>Add Property:</h2>
+    <form action="/save_property" method="POST">
+        <input type="hidden" name="customer_id" value="{{ customer.customer_id }}">
+        <label>Address Line 1:</label>
+        <input type="text" name="address_line1">
+        <label>Address Line 2:</label>
+        <input type="text" name="address_line2">
+        <label>City:</label>
+        <input type="text" name="city">
+        <label>State:</label>
+        <input type="text" name="state">
+        <label>ZIP:</label>
+        <input type="text" name="zip">
+        <label>Is Listing:</label>
+        <input type="checkbox" name="is_listing">
+        <button type="submit">Save Property</button>
+    </form>
+
+    <h2>Properties:</h2>
+    <ul>
+        {% for property in properties %}
+        <li>{{ property.address_line1 }}, {{ property.city }}, {{ property.state }} {{ property.zip }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

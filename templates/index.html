@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealEstateAI Pro - Agent Dashboard</title>
+ <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+ text-align: center;
+  line-height: 1.6;
+}
+
+header {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin: 0.5rem;
+  display: inline-block;
+  text-align: center;
+  width: 22%;
+}
+
+button {
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 0;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background: #666;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+table thead th {
+  background: #333;
+  color: #fff;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f4f4f4;
+}
+
+table tbody tr td {
+  padding: 0.5rem;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+}
+.container-link {
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #333;
+    color: #F0EBEB;
+}
+
+.container-link:hover {
+    background-color: grey;
+}
+
+ </style>
+</head>
+<body>
+    <header>
+        <h1>RealEstateAI Pro - Agent Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="user_profile.html">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+                 <li><a href="admin_console.html">Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+</section>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <div class="card">
+                <h3>Leads</h3>
+                <p>Number of Leads: <span id="leadCount">0</span></p>
+                <button><a href="/leads">View All Leads</a></button>
+            </div>
+            <div class="card">
+                <h3>Appointments</h3>
+                <p>Upcoming Appointments: <span id="appointmentCount">0</span></p>
+                <button>View Calendar</button>
+            </div>
+            <div class="card">
+                <h3>Deals</h3>
+                <p>Active Deals: <span id="dealCount">0</span></p>
+                <button>View Deal Pipeline</button>
+            </div>
+            <div class="card">
+                <h3>Ad Campaigns</h3>
+                <p>Active Campaigns: <span id="campaignCount">0</span></p>
+                <button>View Ad Campaigns</button>
+            </div>
+        </section>
+
+        <section id="recent-activity">
+            <h2>Recent Activity</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                  <script> function populateRecentActivities() {
+  const recentActivitiesTable = document.querySelector('#recent-activity tbody');
+
+  recentActivities.forEach((activity) => {
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+      <td>${activity.type}</td>
+      <td>${activity.description}</td>
+      <td>${activity.date}</td>
+      <td><button>View Details</button></td>
+    `;
+
+    recentActivitiesTable.appendChild(row);
+  });
+}
+</script>
+                </tbody>
+            </table>
+        </section>
+
+       <section id="quick-actions">
+    <h2>Quick Actions</h2>
+      <a href="{{ url_for('newlead') }}" class="container-link">Create New Lead</a>
+            <a href="{{ url_for('pipeline') }}" class="container-link">Pipeline</a>
+            <a href="{{ url_for('generateDocument') }}" class="container-link">Generate Document</a>
+            <a href="{{ url_for('adCampaign') }}" class="container-link">Create New Ad Campaign</a>
+            <a href="{{ url_for('scheduleAppointment') }}" class="container-link">Schedule Appointment</a>
+
+</section>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 RealEstateAI Pro. All rights reserved.</p>
+    </footer>
+
+    <!-- Include JavaScript for dashboard functionality -->
+    <script src="script.js"></script>
+</body>
+</html>
